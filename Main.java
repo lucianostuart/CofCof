@@ -6,6 +6,7 @@ public class Main {
 		boolean rodar = true;
 		LinkedList<Subject> subjectList = new LinkedList<Subject>();
 		Scanner scan = new Scanner(System.in);
+		String answ = "n";
 
 		while(rodar) {
 	       	System.out.print("\033[H\033[2J");
@@ -16,18 +17,34 @@ public class Main {
 			System.out.println("4- Calculate your GPA now!");
 			System.out.print(":: ");
 			while (!scan.hasNextInt()) {
-      				System.out.println("Invalid input!");
-      				scan.nextLine();
-    			}
-    			int opcao = scan.nextInt();
+				System.out.println("Invalid input!");
+				scan.nextLine();
+    		}
+			int tmp = scan.nextInt();
 
-			switch(opcao) {
+			switch(tmp) {
 				case(1):
 					subjectList.add(addSubject());
 					break;
 
 				case(2):
-
+					System.out.println("Subject you want ");
+					String n = scan.nextLine();
+					for (int i = 0; i < subjectList.size(); i++) {
+						if (subjectList.get(i).subjectName.equals(n)) {	
+							System.out.println("Are you sure you want to remove " + subjectList.get(i).subjectName + "? y/N");
+							answ = scan.next();
+							
+							if (answ.toLowerCase().equals("n") || answ.toLowerCase().equals("\n")) {
+								System.out.println("Not REMOVED");
+							} else if (answ.toLowerCase().equals("y")) {
+								System.out.println("REMOVED " + subjectList.get(i).subjectName);
+								subjectList.remove(i);
+							} else {
+								break;
+							}
+						}
+					}
 					break;
 
 				case(3):
