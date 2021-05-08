@@ -10,4 +10,12 @@ public class Subject {
         this.semester = semester;
         this.workLoad = workload;
     }
+
+    public double calculateAvg() {
+        return (this.grade/this.workLoad);
+    }
+
+    public String toString() {
+        return this.subjectName + " " + (this.grade * this.workLoad)+ " ";
+    }
 }
