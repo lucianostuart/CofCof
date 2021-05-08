@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Main {
 	public static void main(String[] args) {
 		boolean goOn = true;
-		LinkedList<Subjectis> subjectList = new LinkedList<Subjectis>();
+		LinkedList<Subjects> subjectList = new LinkedList<Subjects>();
 		Scanner scan = new Scanner(System.in);
 		String answ = "n";
 
@@ -64,7 +64,7 @@ public class Main {
 		scan.close();
 	}
 	
-	public static Subjectis addSubject() {
+	public static Subjects addSubject() {
 		Scanner scan = new Scanner(System.in);
 		
 		System.out.print("\033[H\033[2J");
@@ -94,6 +94,6 @@ public class Main {
 		}
 		double grade = scan.nextDouble();
 		
-		return new Subjectis(nameSubject, workload, grade, semester);
+		return new Subjects(nameSubject, workload, grade, semester);
 	}
 }

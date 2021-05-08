@@ -1,10 +1,10 @@
-class Subjectis {
+class Subjects {
     String subjectName;
     int semester;
     int workLoad;
     double grade;
 
-    public Subjectis(String name, int workload, double grade, int semester) {
+    public Subjects(String name, int workload, double grade, int semester) {
         this.grade = grade;
         this.subjectName = name;
         this.semester = semester;
