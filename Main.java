@@ -71,7 +71,7 @@ public class Main {
 		System.out.println("Add subject\n");
 		
 		System.out.print("Inform the name of the subject: ");
-		String nameSubject = scan.nextLine();
+		String nS = scan.nextLine();
 		
 		System.out.print("Inform its semester: ");
 		while (!scan.hasNextInt()) {
@@ -94,6 +94,6 @@ public class Main {
 		}
 		double grade = scan.nextDouble();
 		
-		return new Subjects(nameSubject, workload, grade, semester);
+		return new Subjects(nS, workload, grade, semester);
 	}
 }
