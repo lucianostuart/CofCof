@@ -1,5 +1,7 @@
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class Main {
 	public static void main(String[] args) {
@@ -28,23 +30,13 @@ public class Main {
 					break;
 
 				case 2:
-					System.out.println("Subject you want ");
-					String n = scan.nextLine();
-					for (int i = 0; i < subjectList.size(); i++) {
-						if (subjectList.get(i).subjectName.equals(n)) {	
-							System.out.println("Are you sure you want to remove " + subjectList.get(i).subjectName + "? y/N");
-							answ = scan.next();
-							
-							if (answ.toLowerCase().equals("n") || answ.toLowerCase().equals("\n")) {
-								System.out.println("Not REMOVED");
-							} else if (answ.toLowerCase().equals("y")) {
-								System.out.println("REMOVED " + subjectList.get(i).subjectName);
-								subjectList.remove(i);
-							} else {
-								break;
-							}
-						}
+					Integer[] toRemove = rmSubject(subjectList);
+        			Arrays.sort(toRemove, Collections.reverseOrder());
+
+					for(int i = 0; i < toRemove.length; i++) {
+						subjectList.remove((int)toRemove[i]);
 					}
+
 					break;
 
 				case 3:
@@ -93,7 +85,43 @@ public class Main {
 			scan.nextLine();
 		}
 		double grade = scan.nextDouble();
-		
+
 		return new Subjects(nameSubject, workload, grade, semester);
+	}
+
+	public static Integer[] rmSubject(LinkedList<Subjects> subjectList) {
+		Scanner scan = new Scanner(System.in);
+
+		System.out.print("\033[H\033[2J");
+		System.out.println("Subject list\n");
+
+		for(int i = 0; i < subjectList.size(); i++) {
+			System.out.print("[" + i + "]: ");
+			System.out.println(subjectList.get(i).subjectName);
+		}
+
+		System.out.print("How many subjects would you like to remove:: ");
+		while (!scan.hasNextInt()) {
+			System.out.println("Invalid input!");
+			scan.nextLine();
+		}
+		int nRemove = scan.nextInt();
+
+		if(nRemove < 0 || nRemove > subjectList.size()) {
+			nRemove = 0;
+		}
+
+		Integer[] toRemove = new Integer[nRemove];
+
+		System.out.print("Inform the numbers of the subjects you would like to remove:: ");
+		for(int i = 0; i < nRemove; i++) {
+			while (!scan.hasNextInt()) {
+				System.out.println("Invalid input!");
+				scan.nextLine();
+			}
+			toRemove[i] = scan.nextInt();
+		}
+
+		return toRemove;
 	}
 }
