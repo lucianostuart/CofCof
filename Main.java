@@ -3,19 +3,19 @@ import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
-		boolean rodar = true;
-		LinkedList<Subject> subjectList = new LinkedList<Subject>();
+		boolean goOn = true;
+		LinkedList<Subjectis> subjectList = new LinkedList<Subjectis>();
 		Scanner scan = new Scanner(System.in);
 		String answ = "n";
 
-		while(rodar) {
+		do {
 	       	System.out.print("\033[H\033[2J");
 			System.out.println("GPA calculator for IMFS students\n");
-			System.out.println("1- Add subject");
-			System.out.println("2- Remove subject");
-			System.out.println("3- Edit subject");
-			System.out.println("4- Calculate your GPA now!");
-			System.out.print(":: ");
+			System.out.println("1 - Add subject");
+			System.out.println("2 - Remove subject");
+			System.out.println("3 - Edit subject");
+			System.out.println("4 - Calculate your GPA now!");
+			System.out.println("0 - Exit");
 			while (!scan.hasNextInt()) {
 				System.out.println("Invalid input!");
 				scan.nextLine();
@@ -23,11 +23,11 @@ public class Main {
 			int tmp = scan.nextInt();
 
 			switch(tmp) {
-				case(1):
+				case 1:
 					subjectList.add(addSubject());
 					break;
 
-				case(2):
+				case 2:
 					System.out.println("Subject you want ");
 					String n = scan.nextLine();
 					for (int i = 0; i < subjectList.size(); i++) {
@@ -47,25 +47,24 @@ public class Main {
 					}
 					break;
 
-				case(3):
+				case 3:
 
 					break;
 
-				case(4):
+				case 4:
 
 					break;
 
-				default:
-
+				case 0:
+					goOn = false;
 					break;
 			}
-		}
+		} while(goOn);
 		
 		scan.close();
 	}
 	
-	public static Subject addSubject() {
-		Subject holderSubject;
+	public static Subjectis addSubject() {
 		Scanner scan = new Scanner(System.in);
 		
 		System.out.print("\033[H\033[2J");
@@ -95,8 +94,6 @@ public class Main {
 		}
 		double grade = scan.nextDouble();
 		
-		holderSubject = new Subject(nameSubject, semester, workload, grade);
-		
-		return holderSubject;
+		return new Subjectis(nameSubject, workload, grade, semester);
 	}
 }
