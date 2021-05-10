@@ -28,11 +28,12 @@ public class Main {
 					break;
 
 				case 2:
-					System.out.println("Subject you want ");
+					System.out.print("\033[H\033[2J");
+					System.out.println("Subject you'd like to subdue:");
 					String n = scan.nextLine();
 					for (int i = 0; i < subjectList.size(); i++) {
 						if (subjectList.get(i).subjectName.equals(n)) {	
-							System.out.println("Are you sure you want to remove " + subjectList.get(i).subjectName + "? y/N");
+							System.out.println("Are you sure you want to remove " + subjectList.get(i).subjectName + "? y/n");
 							answ = scan.next();
 							
 							if (answ.toLowerCase().equals("n") || answ.toLowerCase().equals("\n")) {
@@ -66,7 +67,6 @@ public class Main {
 	
 	public static Subjects addSubject() {
 		Scanner scan = new Scanner(System.in);
-		
 		System.out.print("\033[H\033[2J");
 		System.out.println("Add subject\n");
 		
