@@ -5,8 +5,6 @@ class Subjects {
     int workLoad;
     double grade;
 
-    int teste;
-
     public Subjects(String name, int workload, double grade, int semester) {
         this.grade = grade;
         this.subjectName = name;
