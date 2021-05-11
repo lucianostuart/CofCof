@@ -28,6 +28,7 @@ public class Main {
 					break;
 
 				case 2:
+					scan.nextLine();
 					System.out.print("\033[H\033[2J");
 					System.out.println("Subject you'd like to subdue:");
 					String n = scan.nextLine();
