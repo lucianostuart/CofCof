@@ -63,13 +63,13 @@ public class Main {
 					n = scan.nextLine();
 					
 					for (int i = 0; i < subjectList.size(); i++) {
-						if (subjectList.get(i).subjectName.equals(n)) {	
+						if (subjectList.get(i).subjectName.toLowerCase().equals(n)) {	
 							System.out.println("\nAre you sure you want to edit " + subjectList.get(i).subjectName + "? y/n");
-							answ = scan.next();
+							answ = scan.nextLine();
 							
 							if (answ.toLowerCase().equals("n") || answ.toLowerCase().equals("\n")) {
 								System.out.println("\nNot edited");
-								scan.next();
+								scan.nextLine();
 								break;
 							} else if (answ.toLowerCase().equals("y")) {
 								System.out.println("\nInform what you'd like to edit:");
@@ -107,11 +107,11 @@ public class Main {
 								}
 
 								System.out.println("\nEDITED " + subjectList.get(i).subjectName);
-								scan.next();
+								scan.nextLine();
 								break;
 							} else {
 								System.out.println("\nImpossible to edit " + subjectList.get(i).subjectName);
-								scan.next();
+								scan.nextLine();
 								break;
 							}
 						}
@@ -130,6 +130,7 @@ public class Main {
 						System.out.println(subjectList.get(i).subjectName);	
 					}
 					scan.nextLine();
+					scan.nextLine();
 					break;
 
 				case 0:
@@ -143,7 +144,7 @@ public class Main {
 	
 	public static Subjects addSubject() {
 		scan.nextLine();
-
+		
 		System.out.print("\033[H\033[2J");
 		System.out.println("Add subject\n");
 		
