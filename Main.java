@@ -3,10 +3,11 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Main {
+	static LinkedList<Subjects> subjectList = new LinkedList<Subjects>();
+	static Scanner scan = new Scanner(System.in);
+
 	public static void main(String[] args) {
 		boolean goOn = true;
-		LinkedList<Subjects> subjectList = new LinkedList<Subjects>();
-		Scanner scan = new Scanner(System.in);
 		String answ = "n";
 		String n;
 
@@ -32,6 +33,8 @@ public class Main {
 				case 2:
 					scan.nextLine();
 
+					System.out.print("\033[H\033[2J");
+
 					System.out.println("Remove subject");
 					System.out.println("Which subject you'd like to remove?");
 
@@ -54,9 +57,9 @@ public class Main {
 					scan.nextLine();
 
 					System.out.print("\033[H\033[2J");
-					
+
+					System.out.println("Edit Subject");
 					System.out.println("Please inform which subject you'd like to edit:");
-					
 					n = scan.nextLine();
 					
 					for (int i = 0; i < subjectList.size(); i++) {
@@ -116,7 +119,10 @@ public class Main {
 					break;
 
 				case 4:
+					System.out.println("Your GPA is " + calculateGPA() + " :)");
 
+					scan.nextLine();
+					scan.nextLine();
 					break;
 
 				case 5:
@@ -136,7 +142,6 @@ public class Main {
 	}
 	
 	public static Subjects addSubject() {
-		Scanner scan = new Scanner(System.in);
 		System.out.print("\033[H\033[2J");
 		System.out.println("Add subject\n");
 		
@@ -165,5 +170,17 @@ public class Main {
 		double grade = scan.nextDouble();
 		
 		return new Subjects(nS, workload, grade, semester);
+	}
+
+	public static double calculateGPA() {
+		double cr = 0;
+		double wl = 0;
+
+		for (int i = 0; i < subjectList.size(); i++) {
+			cr += subjectList.get(i).calculateAvg();
+			wl += subjectList.get(i).workLoad;	
+		}
+
+		return (cr / wl) / 10;
 	}
 }

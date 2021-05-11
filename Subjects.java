@@ -13,7 +13,7 @@ class Subjects {
     }
 
     public double calculateAvg() {
-        return (this.grade/this.workLoad);
+        return (this.grade*this.workLoad);
     }
 
     public String toString() {
