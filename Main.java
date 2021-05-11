@@ -142,6 +142,8 @@ public class Main {
 	}
 	
 	public static Subjects addSubject() {
+		scan.nextLine();
+
 		System.out.print("\033[H\033[2J");
 		System.out.println("Add subject\n");
 		
