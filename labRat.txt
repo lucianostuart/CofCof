@@ -1,0 +1,28 @@
+"Alg/Prog 1"   1 75  9.50
+"Bio 1"        1 30  9.80
+"Ed.Fisica 1"  1 30  9.50
+"Filosofia 1"  1 30  6.20
+"Fisica 1"     1 45  10.0
+"Geografia 1"  1 30  9.20
+"Info Basica"  1 30  8.60
+"Ingles 1"     1 30  9.60
+"Portugues 1"  1 60  9.00
+"Logica Ap"    1 45  9.90
+"Mat 1"        1 60  9.29
+"OC Lomba <3"  1 30  9.10
+"Alg/Prog 2"   2 75  9.40
+"Bio 2"        2 30  0.00
+"Ed.Fisica 2"  2 30  1.40
+"Fisica 2"     2 45  6.70
+"Geografia 2"  2 30  7.50
+"Geografia 3"  2 30  7.50
+"IMC"          2 30  9.00
+"Ingles 2"     2 30  9.50
+"Portugues 2"  2 45  6.50
+"Matematica 2" 2 45  6.10
+"MPC"          2 45  8.10
+"Quimica 1"    2 60  7.10
+"SO1 Lomba <3" 2 30  8.70
+"Sociologia 1" 2 30  6.70
+
+0.8041
