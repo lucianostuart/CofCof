@@ -1,8 +1,11 @@
+/*Código phoda*/ 
 class Subjects {
     String subjectName;
     int semester;
     int workLoad;
     double grade;
+
+    int teste;
 
     public Subjects(String name, int workload, double grade, int semester) {
         this.grade = grade;
