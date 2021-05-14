@@ -1,6 +1,13 @@
 /*Código phoda */
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 
 public class Main {
 	static LinkedList<Subjects> subjectList = new LinkedList<Subjects>();
@@ -18,7 +25,10 @@ public class Main {
 			System.out.println("2 - Remove subject");
 			System.out.println("3 - Edit subject");
 			System.out.println("4 - Calculate your GPA now!");
+			System.out.println("5 - List all subjects");
+			System.out.println("6 - Save/Load");
 			System.out.println("0 - Exit");
+			System.out.print(":: ");
 			while (!scan.hasNextInt()) {
 				System.out.println("Invalid input!");
 				scan.nextLine();
@@ -27,7 +37,7 @@ public class Main {
 
 			switch(tmp) {
 				case 1:
-					subjectList.add(addSubject());
+					addSubject();
 					break;
 
 				case 2:
@@ -73,10 +83,11 @@ public class Main {
 								break;
 							} else if (answ.toLowerCase().equals("y")) {
 								System.out.println("\nInform what you'd like to edit:");
-								System.out.println("1- Name");
-								System.out.println("2- Workload");
-								System.out.println("3- Grade");
-								System.out.println("4- Semester");
+								System.out.println("1 - Name");
+								System.out.println("2 - Workload");
+								System.out.println("3 - Grade");
+								System.out.println("4 - Semester");
+								System.out.print(":: ");
 								tmp = scan.nextInt();
 								scan.nextLine();
 								
@@ -133,6 +144,38 @@ public class Main {
 					scan.nextLine();
 					break;
 
+				case 6:
+					scan.nextLine();
+
+					System.out.print("\033[H\033[2J");
+					System.out.println("Choose an option:");
+					System.out.println("1 - Save current list of subjects");
+					System.out.println("2 - Load a list");
+					System.out.print(":: ");
+
+					while (!scan.hasNextInt()) {
+						System.out.println("Invalid input!");
+						scan.nextLine();
+					}
+					tmp = scan.nextInt();
+					
+					switch(tmp) {
+						case 1:
+							salvarArquivo(subjectList);
+							break;
+
+						case 2:
+
+							break;
+						
+						default:
+
+							break;
+					}
+
+
+					break;
+
 				case 0:
 					goOn = false;
 					break;
@@ -142,7 +185,7 @@ public class Main {
 		scan.close();
 	}
 	
-	public static Subjects addSubject() {
+	public static void addSubject() {
 		scan.nextLine();
 		
 		System.out.print("\033[H\033[2J");
@@ -172,7 +215,7 @@ public class Main {
 		}
 		double grade = scan.nextDouble();
 		
-		return new Subjects(nS, workload, grade, semester);
+		subjectList.add(new Subjects(nS, workload, grade, semester));
 	}
 
 	public static double calculateGPA() {
@@ -185,5 +228,31 @@ public class Main {
 		}
 
 		return (cr / wl) / 10;
+	}
+
+	public static void salvarArquivo(LinkedList<Subjects> subjectList) {
+		try {
+            File file = new File("file.txt");
+            file.createNewFile();
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(fw);
+            for(Subjects s : subjectList) {
+				bw.write(s.subjectName + " ");
+				bw.write(String.valueOf(s.semester) + " ");
+				bw.write(String.valueOf(s.workLoad) + " ");
+				bw.write(String.valueOf(s.grade) + " \n");
+			}
+            bw.flush();
+            bw.close();
+            FileReader fr = new FileReader(file);
+            BufferedReader br = new BufferedReader(fr);
+			
+            br.close();
+			
+		} catch(IOException e) {
+			System.out.println("An error occured!");
+		}
+
+		
 	}
 }
