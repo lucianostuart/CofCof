@@ -5,7 +5,7 @@ class Subjects {
     int workLoad;
     double grade;
 
-    public Subjects(String name, int workload, double grade, int semester) {
+    public Subjects(String name, int semester, int workload, double grade) {
         this.grade = grade;
         this.subjectName = name;
         this.semester = semester;
