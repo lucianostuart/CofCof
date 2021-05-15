@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 
 public class Main {
@@ -50,7 +51,7 @@ public class Main {
 
 					n = scan.nextLine();
 					for (int i = 0; i < subjectList.size(); i++) {
-						if (subjectList.get(i).subjectName.toLowerCase().equals(n)) {
+						if (subjectList.get(i).subjectName.toLowerCase().equals(n.toLowerCase())) {
 							System.out.println(subjectList.get(i).subjectName + " will be removed. You sure? (y/N)"+ "\n Fo' shizzle my nizzle");
 							answ = scan.next();
 
@@ -138,7 +139,10 @@ public class Main {
 
 				case 5:
 					for (int i = 0; i < subjectList.size(); i++) {
-						System.out.println(subjectList.get(i).subjectName);	
+						System.out.print(subjectList.get(i).subjectName + " ");	
+						System.out.print(subjectList.get(i).semester + " ");	
+						System.out.print(subjectList.get(i).workLoad + " ");	
+						System.out.println(subjectList.get(i).grade);	
 					}
 					scan.nextLine();
 					scan.nextLine();
@@ -165,11 +169,7 @@ public class Main {
 							break;
 
 						case 2:
-
-							break;
-						
-						default:
-
+							subjectList = new LinkedList<Subjects>(carregarArquivo());
 							break;
 					}
 
@@ -215,32 +215,33 @@ public class Main {
 		}
 		double grade = scan.nextDouble();
 		
-		subjectList.add(new Subjects(nS, workload, grade, semester));
+		subjectList.add(new Subjects(nS, semester, workload, grade));
 	}
 
-	public static double calculateGPA() {
+	public static String calculateGPA() {
 		double cr = 0;
 		double wl = 0;
+		DecimalFormat df = new DecimalFormat("0.00000");
 
 		for (int i = 0; i < subjectList.size(); i++) {
 			cr += subjectList.get(i).calculateAvg();
 			wl += subjectList.get(i).workLoad;	
 		}
 
-		return (cr / wl) / 10;
+		return df.format((cr / wl) / 10);
 	}
 
 	public static void salvarArquivo(LinkedList<Subjects> subjectList) {
 		try {
-            File file = new File("file.txt");
+            File file = new File("test.txt");
             file.createNewFile();
             FileWriter fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw);
             for(Subjects s : subjectList) {
-				bw.write(s.subjectName + " ");
-				bw.write(String.valueOf(s.semester) + " ");
-				bw.write(String.valueOf(s.workLoad) + " ");
-				bw.write(String.valueOf(s.grade) + " \n");
+				bw.write("\"" + s.subjectName + "\",");
+				bw.write("\"" + String.valueOf(s.semester) + "\",");
+				bw.write("\"" + String.valueOf(s.workLoad) + "\",");
+				bw.write("\"" + String.valueOf(s.grade) + "\",\n");
 			}
             bw.flush();
             bw.close();
@@ -254,5 +255,29 @@ public class Main {
 		}
 
 		
+	}
+
+	public static LinkedList<Subjects> carregarArquivo() {
+		LinkedList<Subjects> holderList = new LinkedList<Subjects>();
+
+		try {
+			File file = new File("test.txt");
+            file.createNewFile();
+            FileReader fr = new FileReader(file);
+            BufferedReader br = new BufferedReader(fr);
+			String h1;
+			while((h1 = br.readLine()) != null) {
+				String[] h2 = h1.split("\",(\")*");
+				Subjects Sub = new Subjects(h2[0].replaceAll("\"", ""), Integer.parseInt(h2[1]), Integer.parseInt(h2[2]), Double.parseDouble(h2[3]));
+				holderList.add(Sub);
+			}
+			
+            br.close();
+			
+		} catch(IOException e) {
+			System.out.println("An error occured!");
+		}
+
+		return holderList;
 	}
 }
